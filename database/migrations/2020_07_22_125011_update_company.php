@@ -13,7 +13,7 @@ class UpdateCompany extends Migration
      */
     public function up()
     {
-        Schema::table('company', function (Blueprint $table) {
+        Schema::table('companies', function (Blueprint $table) {
           
             //$table->foreign('user_id')->references('id')->on('users');
            $table->foreign('company_type')->references('id')->on('company_type');

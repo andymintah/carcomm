@@ -9,14 +9,10 @@ class ForumController extends Controller
 {
     public function index()
     {
-        if (Auth::check())
-        {
 
-        $forumPosts = forumPost::where('user_id', auth::user()->id);
+        $forumPosts = forumPost::all() ;
         return view('forum.index',['forumPosts'=> $forumPosts]); 
 
-        }
-        return view('auth.login');
     }
 
 

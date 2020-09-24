@@ -23,18 +23,26 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="<?php echo e(url('/')); ?>">
-                    <?php echo e(config('app.name', 'CarComm')); ?>
-
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="<?php echo e(__('Toggle navigation')); ?>">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                                    <a class="nav-link" href="/home">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/companies">Companies</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/dealership">Dealership</a>
+                                </li>
 
+                                 <li class="nav-item">
+                                    <a class="nav-link" href="/blog">Blog</a>
+                                </li>   
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/forum">Forum</a>
+                                </li>                        
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -73,6 +81,10 @@
                 </div>
             </div>
         </nav>
+
+        <div class="container">
+        <?php echo $__env->make('partials.success', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        <?php echo $__env->make('partials.errors', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
         <main class="py-4">
             <?php echo $__env->yieldContent('content'); ?>

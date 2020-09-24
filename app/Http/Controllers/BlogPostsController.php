@@ -9,14 +9,12 @@ class BlogPostsController extends Controller
 {
     public function index()
     {
-        if (Auth::check())
-        {
+    
 
-        $blogPosts = blogPost::where('user_id', auth::user()->id);
+        $blogPosts = blogPost::all();
         return view('blog.index',['blogPosts'=> $blogPosts]); 
 
-        }
-        return view('auth.login');
+
     }
 
 

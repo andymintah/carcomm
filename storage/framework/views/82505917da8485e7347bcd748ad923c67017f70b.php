@@ -8,10 +8,8 @@
 <div class="row">
 
   <div class="col-md-12 col-lg-12 col-sm-12">
-  <form method="post" 
-  action="<?php echo e(route('company.store')); ?>"
-  enctyoe="multipart/form-data">
-  <?php echo e(csrf_field()); ?>
+  <form method="post"  action="<?php echo e(route('companies.store')); ?>" enctype="multipart/form-data">
+    <?php echo e(csrf_field()); ?>
 
   <input type="hidden" name="_method" value="post">
   
@@ -74,17 +72,16 @@
 <div class="form-group">
 
     <div class="form-check form-check-inline">
-  <input class="form-check-input" type="checkbox" id="companytype" name="companytype" value="1">
+  <input class="form-check-input" type="checkbox" id="companytype" name="companytype[]" value="1">
   <label class="form-check-label" for="inlineCheckbox1">Dealership</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="checkbox" id="companytype" name="companytype"  value="2">
+  <input class="form-check-input" type="checkbox" id="companytype" name="companytype[]"  value="2">
   <label class="form-check-label" for="companytype">Auto-Mechanic</label>
 </div>
 </div>
 
 
-  </div>
 
 
 

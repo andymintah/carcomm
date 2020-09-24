@@ -15,61 +15,76 @@ class CompaniesController extends Controller
      */ 
     public function index()
     {
-        if (Auth::check())
-        {
+     
 
-        $companies = Company::where('user_id', auth::user()->id);
+        $companies = Company::all();
         return view('companies.index',['companies'=> $companies]); 
 
-        }
-        return view('auth.login');
+
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function create()
     {
         return view ('companies.create');
 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         if(Auth::check()){
+            $this->validate($request,[
+                'name' => 'required|100',
+                'image' =>'image|max:1999'
+
+            ]);
+
+            if ($request->hasfile('image'))
+            {
+                $filenameWithExt = $request->file('image')->getClientOriginalName();
+                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                $extension = $request->file('image')->getClientOriginalExtension();
+               $filenameToStore = $filename.'_'.time().'.'.$extension;
+                $path= $request->file('image')->storeAs('public/companyimg', $filenameToStore);
+                
+                
+                
+               
+            }
+            else {
+                $filenameToStore='';
+            }
+
+
             $company = Company::create([
                 'name' =>$request->input('name'),
                 'description' =>$request->input('description'),
                 'address' =>$request->input('address'),
                 'contactno' =>$request->input('contactno'),
-
+                'company_type' =>implode('',$request->input('companytype')),
+                'imageurl' =>$filenameToStore,
                 'user_id' => Auth::user()->id
 
             ]);
-
+          
             if($company){
-                return redirect()->route('company.show',['company' => $company->id])
+                echo('Successful');
+                return redirect()->route('companies.show',['company' => $company->id])
                 ->with('success','Company Created Successfully');
             }
+            echo('Failure');
+
+            return back()->withInput()->with('errors','Error Creating New Company');
+
+        }
+        else {
+        return view('auth.login');
         }
 
-        return back()->withInput()->with('errors','Error Creating New Company');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Company  $company
-     * @return \Illuminate\Http\Response
-     */
+   
     public function show(Company $company)
     {
         $company = Company::find($company->id);
@@ -102,7 +117,7 @@ class CompaniesController extends Controller
     {
         //save data
  
-        $companyUdate = Company::where('id',$company->id)->update([
+        $companyUpdate = Company::where('id',$company->id)->update([
             'name'=>$request->input('name'),
             'description'=>$request->input('description')
 
