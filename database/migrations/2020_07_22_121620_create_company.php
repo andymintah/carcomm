@@ -21,7 +21,7 @@ class CreateCompany extends Migration
             $table->string('contactno')->nullable();
             $table->string('imageurl')->nullable();
 
-            $table->bigInteger('company_type')->unsigned();
+            $table->string('company_type')->nullable();
             $table->bigInteger('user_id')->unsigned();
             $table->timestamps();
         });

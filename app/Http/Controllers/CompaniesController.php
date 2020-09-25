@@ -35,13 +35,12 @@ class CompaniesController extends Controller
     {
         if(Auth::check()){
             $this->validate($request,[
-                'name' => 'required|100',
+                'name' => 'required',
                 'image' =>'image|max:1999'
 
             ]);
 
-            if ($request->hasfile('image'))
-            {
+         
                 $filenameWithExt = $request->file('image')->getClientOriginalName();
                 $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
                 $extension = $request->file('image')->getClientOriginalExtension();
@@ -55,14 +54,15 @@ class CompaniesController extends Controller
                 $company->description = $request->input('description');
                 $company->address = $request->input('address');
                 $company->contactno = $request->input('contactno');
-                $company->companytype = $request->input('companytype');
-                $company->image = $filenameToStore;
+                $company->company_type = implode($request->input('companytype'));
+                $company->imageurl = $filenameToStore;
+                $company->user_id = Auth::user()->id;
 
                 $company->save();
 
                 return redirect('/companies')->with('success', 'Company Created');
 
-        }
+        
     }
         else {
         return view('auth.login');
