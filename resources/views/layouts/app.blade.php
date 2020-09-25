@@ -33,9 +33,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="/companies">Companies</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="/dealership">Dealership</a>
-                                </li>
+
 
                                  <li class="nav-item">
                                     <a class="nav-link" href="/blog">Blog</a>
@@ -44,7 +42,16 @@
                                     <a class="nav-link" href="/forum">Forum</a>
                                 </li>                        
                     </ul>
+                    <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                    <a class="btn-sm btn btn-outline-secondary"  href = "/companies/create" style="text-decoration: none">New Company</a><br/>
+                    </li>
+                                <li class="nav-item">
+                                <a class="btn-sm btn btn-outline-secondary"  href = "/blog/create" style="text-decoration: none">New Blog Post</a>
+                                </li>
 
+                       
+                    </ul>
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->

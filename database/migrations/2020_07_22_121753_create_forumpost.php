@@ -13,7 +13,7 @@ class CreateForumpost extends Migration
      */
     public function up()
     {
-        Schema::create('forumpost', function (Blueprint $table) {
+        Schema::create('forum_posts', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title');
             $table->longText('body')->nullable();
@@ -21,7 +21,7 @@ class CreateForumpost extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->timestamps();
         });
-        Schema::table('forumpost', function (Blueprint $table) {
+        Schema::table('forum_posts', function (Blueprint $table) {
           
             $table->foreign('user_id')->references('id')->on('users');
         });
@@ -35,6 +35,6 @@ class CreateForumpost extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('forumpost');
+        Schema::dropIfExists('forum_posts');
     }
 }

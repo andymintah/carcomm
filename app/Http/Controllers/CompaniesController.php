@@ -48,36 +48,22 @@ class CompaniesController extends Controller
                $filenameToStore = $filename.'_'.time().'.'.$extension;
                 $path= $request->file('image')->storeAs('public/companyimg', $filenameToStore);
                 
-                
-                
-               
-            }
-            else {
-                $filenameToStore='';
-            }
 
 
-            $company = Company::create([
-                'name' =>$request->input('name'),
-                'description' =>$request->input('description'),
-                'address' =>$request->input('address'),
-                'contactno' =>$request->input('contactno'),
-                'company_type' =>implode('',$request->input('companytype')),
-                'imageurl' =>$filenameToStore,
-                'user_id' => Auth::user()->id
+                $company= new Company;
+                $company->name = $request->input('name');
+                $company->description = $request->input('description');
+                $company->address = $request->input('address');
+                $company->contactno = $request->input('contactno');
+                $company->companytype = $request->input('companytype');
+                $company->image = $filenameToStore;
 
-            ]);
-          
-            if($company){
-                echo('Successful');
-                return redirect()->route('companies.show',['company' => $company->id])
-                ->with('success','Company Created Successfully');
-            }
-            echo('Failure');
+                $company->save();
 
-            return back()->withInput()->with('errors','Error Creating New Company');
+                return redirect('/companies')->with('success', 'Company Created');
 
         }
+    }
         else {
         return view('auth.login');
         }
@@ -119,7 +105,10 @@ class CompaniesController extends Controller
  
         $companyUpdate = Company::where('id',$company->id)->update([
             'name'=>$request->input('name'),
-            'description'=>$request->input('description')
+            'description'=>$request->input('description'),
+            'address'=>$request->input('address'),
+            'contactno'=>$request->input('contactno'),
+            'companytype'=>$request->input('companytype')
 
         ]);
     if($companyUdate){

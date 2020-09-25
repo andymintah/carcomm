@@ -13,7 +13,7 @@ class CreateBlogpost extends Migration
      */
     public function up()
     {
-        Schema::create('blogpost', function (Blueprint $table) {
+        Schema::create('blog_posts', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title');
             $table->longText('body')->nullable();
@@ -21,7 +21,7 @@ class CreateBlogpost extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->timestamps();
         });
-        Schema::table('blogpost', function (Blueprint $table) {
+        Schema::table('blog_posts', function (Blueprint $table) {
           
             $table->foreign('user_id')->references('id')->on('users');
         });
@@ -34,6 +34,6 @@ class CreateBlogpost extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('blogpost');
+        Schema::dropIfExists('blog_posts');
     }
 }

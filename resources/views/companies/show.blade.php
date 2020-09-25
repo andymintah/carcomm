@@ -8,6 +8,15 @@
 <div class="container">
   <h1 class="display-3">{{$company->name }}</h1>
   <p>{{$company->description}}</p>
-  <p><a class="btn btn-primary btn-lg" href="#" role="button">More</a></p>
 </div>
 </div>
+
+
+<div class="col-md-3 col-lg-3 col-sm-3 pull-right">
+
+
+</div>
+
+
+@endsection
+
